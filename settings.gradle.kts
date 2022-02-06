@@ -1,0 +1,13 @@
+rootProject.name = "sample"
+include(":app")
+include(":domain")
+include(":data:data-core")
+include(":data:data-remote")
+include(":features:shifts")
+include(":data:data-local")
+include(":core")
+include(":navigation")
+include(":utility:bases")
+include(":utility:bases-android")
+include(":designSystem")
+include(":features:map")

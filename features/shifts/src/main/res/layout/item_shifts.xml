@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.shamlou.designSystem.ShiftView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:earningsAmount="@{item.averageEstimatedEarningsPerHour}"
+        app:extraBriefing="@{item.job.extraBriefing}"
+        app:shiftTitle="@{item.job.title}"
+        app:startAndEnd="@{item.recurringShiftSchedule.startAndEnd}" />
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.shamlou.shift.model.shifts.ResponseShiftDataView" />
+
+    </data>
+
+</layout>

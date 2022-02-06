@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/binding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            binding:isVisible="@{viewModel.shifts.loading}" />
+
+        <Toolbar
+            android:id="@+id/toolbar_shifts"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/blue_800"
+            android:shadowColor="@color/blue_600"
+            android:title="@{viewModel.shifts.data.aggregations}"
+            android:titleTextColor="@color/white"
+            binding:isVisible="@{viewModel.shifts.success}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_shifts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/spacing_xs"
+            app:layout_constraintBottom_toTopOf="@id/view_bottom_background"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_shifts"
+            binding:isVisible="@{viewModel.shifts.success}"
+            binding:setData="@{viewModel.shifts.data.data}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:elevation="4dp"
+            android:id="@+id/button_filter"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            app:icon="@drawable/ic_filter"
+            app:iconGravity="textStart"
+            app:iconTint="@color/blue_800"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/view_bottom_background"
+            app:rippleColor="@color/blue_400"
+            android:layout_margin="@dimen/spacing_s"
+            android:text="@string/filter"
+            binding:isVisible="@{viewModel.shifts.success}" />
+
+        <View
+            android:id="@+id/view_bottom_background"
+            android:elevation="4dp"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            binding:isVisible="@{viewModel.shifts.success}"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:elevation="4dp"
+            android:id="@+id/button_login"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/blue_800"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@+id/button_sign_up"
+            android:layout_margin="@dimen/spacing_s"
+            android:text="@string/login"
+            android:onClick="@{() -> viewModel.loginClicked()}"
+            binding:isVisible="@{viewModel.shifts.success}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:elevation="4dp"
+            android:id="@+id/button_sign_up"
+            app:layout_constraintStart_toEndOf="@id/button_login"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:strokeColor="@color/blue_800"
+            android:layout_margin="@dimen/spacing_s"
+            android:text="@string/sign_up"
+            app:backgroundTint="?attr/colorOnPrimary"
+            android:onClick="@{() -> viewModel.signUpClicked()}"
+            binding:isVisible="@{viewModel.shifts.success}"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:elevation="4dp"
+            android:id="@+id/button_retry"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:strokeColor="@color/blue_800"
+            android:layout_margin="@dimen/spacing_s"
+            android:text="@string/retry"
+            app:backgroundTint="@color/white"
+            android:onClick="@{() -> viewModel.getShiftsAsync()}"
+            binding:isVisible="@{viewModel.shifts.isError}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shamlou.shift.ui.shifts.ShiftsViewModel" />
+
+    </data>
+
+</layout>
