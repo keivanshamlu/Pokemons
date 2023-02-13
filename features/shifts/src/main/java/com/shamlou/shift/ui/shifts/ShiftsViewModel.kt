@@ -73,10 +73,9 @@ class ShiftsViewModel @AssistedInject constructor(
     }
 
     fun chained() = viewModelScope.launch {
-        launch {
-            request1()
-            request2()
-        }
+        request1()
+        request2()
+
     }
 
     fun chainedAnotherWay() = viewModelScope.launch {
@@ -90,7 +89,7 @@ class ShiftsViewModel @AssistedInject constructor(
         b.join()
     }
 
-    private suspend fun request1(){
+    private suspend fun request1() {
         _shifts.emit(Resource.loading())
         Log.d("TESTEST", "start request 1")
         getShiftsUseCase.invoke(Unit).map {
@@ -101,7 +100,8 @@ class ShiftsViewModel @AssistedInject constructor(
             Log.d("TESTEST", "response 1")
         }
     }
-    private suspend fun request2(){
+
+    private suspend fun request2() {
         _shifts.emit(Resource.loading())
         Log.d("TESTEST", "start request 2")
         getShiftsUseCase.invoke(Unit).map {
@@ -112,6 +112,7 @@ class ShiftsViewModel @AssistedInject constructor(
             Log.d("TESTEST", "response 2")
         }
     }
+
     /**
      * calls when user click on login button
      */
