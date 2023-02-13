@@ -75,7 +75,6 @@ class ShiftsViewModel @AssistedInject constructor(
     fun chained() = viewModelScope.launch {
         request1()
         request2()
-
     }
 
     fun chainedAnotherWay() = viewModelScope.launch {
